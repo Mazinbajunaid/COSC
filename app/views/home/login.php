@@ -13,16 +13,24 @@
         <div class="col-lg-12">
             <form class="form-horizontal" action="/login/index" method="post">
 			    <fieldset>
-					  <p>
-                    Username:<input type="text" name="username"><br><br>
-                    Password: <input     type="passowrd" name="password"><br><br>
-                    <input type="submit" name="login" value="login">
-                    <input type="submit" name="report" value="report">
-					<?php echo "<p><a href='registration.php'> register here</a>";?>
-			    </fieldset>
-			</form>
-			<a href="/login/register"> Sign up here </a>
-        </div>
-    </div>
+					
+            <label><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="UserName">
+			<br/>
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="Password">
+			<br/>
+            <input type="submit" value="Login">
+			
+			<input type="checkbox" checked="checked"> Remember
+			<div class="container" style="background-color:#f1f1f1">
+			
+			<span class="user & psw">Forgot <a href="#"> Username or password?</a></span></b>
 
+	
+        </form>
+
+	<body>
+	 
+</html>
     <?php require_once '../app/views/templates/footer.php' ?>
