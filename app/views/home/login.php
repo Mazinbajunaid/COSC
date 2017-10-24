@@ -13,27 +13,24 @@
         <div class="col-lg-12">
             <form class="form-horizontal" action="/login/index" method="post">
 			    <fieldset>
-					<div class="form-group">
-					  <label for="username" class="col-lg-2 control-label">Username</label>
-					  <div class="col-lg-10">
-						<input type="text" class="form-control" name="username" placeholder="Username">
-					  </div>
-					</div>
-					<div class="form-group">
-					  <label for="password" class="col-lg-2 control-label">Password</label>
-					  <div class="col-lg-10">
-						<input type="password" class="form-control" name="password" placeholder="Password">
-					  </div>
-					</div>
-					<div class="form-group">
-					  <div class="col-lg-10 col-lg-offset-2">
-						<button type="submit" class="btn btn-primary">Submit</button>
-					  </div>
-					</div>
-			    </fieldset>
-			</form>
-			<a href="/login/register"> Sign up here </a>
-        </div>
-    </div>
+					
+            <label><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="UserName">
+			<br/>
+            <label><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="Password">
+			<br/>
+            <input type="submit" value="Login">
+			
+			<input type="checkbox" checked="checked"> Remember
+			<div class="container" style="background-color:#f1f1f1">
+			
+			<span class="user & psw">Forgot <a href="#"> Username or password?</a></span></b>
 
+	
+        </form>
+
+	<body>
+	 
+</html>
     <?php require_once '../app/views/templates/footer.php' ?>

@@ -33,11 +33,12 @@ class User {
 	
 	public function register ($username, $password) {
 		$db = db_connect();
-        $statement = $db->prepare("INSERT INTO users (name)"
-                . " VALUES (:name); ");
-
-        $statement->bindValue(':name', $username);
-        $statement->execute();
+        $insert=$conn->prepare("INSERT INTO users(username, password, email)
+               values(:username,:password,:email)");
+   $insert->bindParam('username',$name);
+   $insert->bindParam('email',$email);
+   $insert->bindParam('password',$pass1);
+   $insert->execute();
 
 	}
 
