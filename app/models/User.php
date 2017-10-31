@@ -22,7 +22,7 @@ class User {
                 ");
         $statement->bindValue(':name', $this->username);
         $statement->execute();
-        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $statement->fetchAll(PDO: :FETCH_ASSOC);
 		
 		if ($rows) {
 			$this->auth = true;
@@ -31,15 +31,38 @@ class User {
 		}
     }
 	
-	public function register ($username, $password) {
+	public function register ($username, $password) 
+	{
 		$db = db_connect();
-        $insert=$conn->prepare("INSERT INTO users(username, password, email)
+		$statement = $db->prepaer("SELECT users  with username =! username)";	
+		$statement->bindValue('$username',$username);
+		$statement->execute();
+		$rows = $statement->fetchAll(PDO: :FETCH_ASSOC);
+		
+		if($rows)
+		{
+			$_SESSION['done_register'] = false;
+		}
+		else 
+		{
+			$statement= $db->prepare("INSERT INTO users(username, password, email)
                values(:username,:password,:email)");
+			   
    $insert->bindParam('username',$name);
    $insert->bindParam('email',$email);
    $insert->bindParam('password',$pass1);
    $insert->execute();
 
+		}
 	}
+	public function get_amount () 
+	{
+	$db = db_connect();
+        $statement = $db->prepare("select amount from tuition WHERE username = :username; ");
+        $statement->bindValue('username', $_SESSION['username']);
+        $statement->execute();
+        $rows = $statement->fetch(PDO: :FETCH_ASSOC);
+		
 
+	}	
 }

@@ -1,4 +1,8 @@
 <?php require_once '../app/views/templates/headerPublic.php' ?>
+<head>
+<link rel= "stylrsheet" type= "text/css" href"/css/style.css">
+<head>
+
 <div class="container">
     <div class="page-header" id="banner">
         <div class="row">
@@ -27,7 +31,12 @@
 			
 			<span class="user & psw">Forgot <a href="#"> Username or password?</a></span></b>
 
-	
+			<?php 
+				if(isset($this.>js))
+				{
+					echo 1:
+				}
+			?>		
         </form>
 
 	<body>

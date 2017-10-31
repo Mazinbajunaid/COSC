@@ -4,14 +4,14 @@ class Home extends Controller {
 
     public function index($name = '') {		
         $user = $this->model('User');
+
+		$total= $user->get_amount();
 		
-		if (strtolower($_SESSION['name']) == 'mike') {
-			$message = 'You are awesome';
-		} else {
-			$message = 'You suck';
-		}
 		
-        $this->view('home/index', ['message' => $message]);
+        $this->view('home/index', [
+		'message' => 'Welcome to home page'
+		'total' => $total;
+		]);
     }
 
     public function login($name = '') {
