@@ -5,7 +5,7 @@
             <div class="col-lg-12">
 			</br>
 			<a href="/home">Back</a>
-                <h1>Update Note</h1>
+                <h1>Create New Note</h1>
                 <p class="lead"> <?= date("F jS, Y"); ?></p>
             </div>
         </div>
@@ -13,21 +13,18 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <form class="form-horizontal" action="/crud/update" method="post">
+            <form class="form-horizontal" action="/crud/create" method="post">
 			    <fieldset>
 					<div class="form-group">
-					<input type="hidden" name="id" id="id" value="<?php echo $_GET['id']; ?>">
-					  <label for="subject" class="col-lg-2 control-label">Subject</label>
+					  <label for="username" class="col-lg-2 control-label">Subject</label>
 					  <div class="col-lg-10">
-						<input type="text" class="form-control" value="<?php echo $_GET['subject']; ?>" name="subject" id="subject" placeholder="Subject">
+						<input type="text" class="form-control" name="subject" id="subject" placeholder="Subject">
 					  </div>
 					</div>
 					<div class="form-group">
 					  <label for="description" class="col-lg-2 control-label">Description</label>
 					  <div class="col-lg-10">
-						 <textarea class="form-control" rows="5" id="description" name="description">
-						 <?php echo htmlspecialchars($_GET['description']); ?>
-						 </textarea>
+						 <textarea class="form-control" rows="5" id="description" name="description"></textarea>
 					  </div>
 					</div>
 					<div class="form-group">

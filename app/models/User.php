@@ -18,11 +18,12 @@ class User {
 		 
 		$db = db_connect();
         $statement = $db->prepare("select * from users
-                                WHERE name = :name;
+                                WHERE name = :name and password = :password;
                 ");
         $statement->bindValue(':name', $this->username);
+        $statement->bindValue(':password', $this->password);
         $statement->execute();
-        $rows = $statement->fetchAll(PDO: :FETCH_ASSOC);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 		
 		if ($rows) {
 			$this->auth = true;
@@ -34,35 +35,29 @@ class User {
 	public function register ($username, $password) 
 	{
 		$db = db_connect();
-		$statement = $db->prepaer("SELECT users  with username =! username)";	
-		$statement->bindValue('$username',$username);
-		$statement->execute();
-		$rows = $statement->fetchAll(PDO: :FETCH_ASSOC);
-		
+		 $statement = $db->prepare("select * from users
+                                WHERE name = :name;
+                ");
+        $statement->bindValue(':name', $username);
+        $statement->execute();
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
 		if($rows)
 		{
-			$_SESSION['done_register'] = false;
+			session_start();
+			$_SESSION['message'] = "User Alread Exist.";
 		}
-		else 
+		else
 		{
-			$statement= $db->prepare("INSERT INTO users(username, password, email)
-               values(:username,:password,:email)");
-			   
-   $insert->bindParam('username',$name);
-   $insert->bindParam('email',$email);
-   $insert->bindParam('password',$pass1);
-   $insert->execute();
+        $statement = $db->prepare("INSERT INTO users (name,password)"
+                . " VALUES (:name,:password); ");
 
-		}
-	}
-	public function get_amount () 
-	{
-	$db = db_connect();
-        $statement = $db->prepare("select amount from tuition WHERE username = :username; ");
-        $statement->bindValue('username', $_SESSION['username']);
+        $statement->bindValue(':name', $username);
+        $statement->bindValue(':password', md5($password));
         $statement->execute();
-        $rows = $statement->fetch(PDO: :FETCH_ASSOC);
+		session_start();
+		$_SESSION['message'] = "You have successfully register, please go to Login page.";
+		}
 		
+	}
 
-	}	
 }

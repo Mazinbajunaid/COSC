@@ -5,6 +5,15 @@
             <div class="col-lg-12">
                 <h1>Please create an account</h1>
                 <p class="lead"> <?= date("F jS, Y"); ?></p>
+				<?php 
+				if(isset($_SESSION['message']))
+				{
+				echo $_SESSION['message'];
+				unset($_SESSION['message']);
+				}
+				
+				?>
+				
             </div>
         </div>
     </div>
@@ -14,22 +23,26 @@
             <form class="form-horizontal" action="/login/register" method="post">
 			    <fieldset>
 					<div class="form-group">
-					 <body>
-       
-			<body id="body-color"> <div id="Sign-Up"> 
-			<fieldset style="width:30%"><legend>Registration Form</legend>
-			<table border="0"> <tr> <form method="POST" action="connectivity-sign-up.php"> 
-			<td>Name</td><td> <input type="text" name="name"></td> </tr> <tr> <td>Email</td><td>
-			<input type="text" name="email"></td> </tr> <tr> <td>UserName</td><td> 
-			<input type="text" name="user"></td> </tr> <tr> <td>Password</td><td> 
-			<input type="password" name="pass"></td> </tr> <tr> <td>Confirm Password </td><td>
-			<input type="password" name="cpass"></td> </tr> <tr> <td>
-			<input id="button" type="submit" name="submit" value="Sign-Up"></td> </tr>
+					  <label for="username" class="col-lg-2 control-label">New Username</label>
+					  <div class="col-lg-10">
+						<input type="text" class="form-control" name="username" placeholder="Username">
+					  </div>
+					</div>
+					<div class="form-group">
+					  <label for="password" class="col-lg-2 control-label">New Password</label>
+					  <div class="col-lg-10">
+						<input type="password" class="form-control" name="password" placeholder="Password">
+					  </div>
+					</div>
+					<div class="form-group">
+					  <div class="col-lg-10 col-lg-offset-2">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					  </div>
+					</div>
+			    </fieldset>
 			</form>
-			</table>
-			</fieldset>
-			</div>
-			
+			<a href="/home/login"> Sign In here </a>
+        </div>
+    </div>
 
-</html>
-    <?php require_once '../app/views/templates/footer.php' ?>
+    <?php require_once '../app/views/templates/footerPublic.php' ?>

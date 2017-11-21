@@ -1,14 +1,20 @@
 <?php require_once '../app/views/templates/headerPublic.php' ?>
-<head>
-<link rel= "stylrsheet" type= "text/css" href"/css/style.css">
-<head>
-
 <div class="container">
     <div class="page-header" id="banner">
         <div class="row">
             <div class="col-lg-12">
                 <h1>You are not logged in! haha</h1>
                 <p class="lead"> <?= date("F jS, Y"); ?></p>
+				<?php 
+				//echo $_SESSION['attempts'];
+			//	echo  $_COOKIE['attempts'];
+				if(isset($_COOKIE['attempts'])) 
+				{
+					echo "Too Many Attempts! pleaes try after 60 seconds.";
+				}
+				//else
+					//echo "cookies is not set";
+			?>
             </div>
         </div>
     </div>
@@ -17,29 +23,27 @@
         <div class="col-lg-12">
             <form class="form-horizontal" action="/login/index" method="post">
 			    <fieldset>
-					
-            <label><b>Username</b></label>
-			<input type="text" placeholder="Enter Username" name="UserName">
-			<br/>
-            <label><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="Password">
-			<br/>
-            <input type="submit" value="Login">
-			
-			<input type="checkbox" checked="checked"> Remember
-			<div class="container" style="background-color:#f1f1f1">
-			
-			<span class="user & psw">Forgot <a href="#"> Username or password?</a></span></b>
+					<div class="form-group">
+					  <label for="username" class="col-lg-2 control-label">Username</label>
+					  <div class="col-lg-10">
+						<input type="text" class="form-control" name="username" placeholder="Username">
+					  </div>
+					</div>
+					<div class="form-group">
+					  <label for="password" class="col-lg-2 control-label">Password</label>
+					  <div class="col-lg-10">
+						<input type="password" class="form-control" name="password" placeholder="Password">
+					  </div>
+					</div>
+					<div class="form-group">
+					  <div class="col-lg-10 col-lg-offset-2">
+						<button type="submit" class="btn btn-primary">Submit</button>
+					  </div>
+					</div>
+			    </fieldset>
+			</form>
+			<a href="/login/register"> Sign up here </a>
+        </div>
+    </div>
 
-			<?php 
-				if(isset($this.>js))
-				{
-					echo 1:
-				}
-			?>		
-        </form>
-
-	<body>
-	 
-</html>
-    <?php require_once '../app/views/templates/footer.php' ?>
+    <?php require_once '../app/views/templates/footerPublic.php' ?>

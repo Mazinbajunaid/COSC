@@ -1,174 +1,54 @@
 <?php
 
-class Login extends Controller 
-{
-    public function index()
-	{
+class Login extends Controller {
+    public function index() {
         $user = $this->model('User');
+        $log = $this->model('Log');
 
-        if (in_array($_POST['UserName'], $LoginInfo))
-		{
-			$key = array_search($_POST['UserName'], $LoginInfo);
-			if ($_POST['Password'] == $passInfo[$key])
-			{
-				$_SESSION['LOIN'] = $_POST['username'];
-				
-				$_SESSION['paIN'] = $_POST['password'];
-				
-			}
-		
-		
-			if (isset($_Post['username']))
-			{
-				$user->username = $_POST['username'];
-			}
-		
-			if (isset($_Post['password']))
-			{
-			
-				$user->password = $_POST ['password'];
-			}
+        if (isset($_POST['username'])) {
+            $user->username = $_POST['username'];
+        }
+
+        if (isset($_POST['password'])) {
+            $user->password = md5($_POST['password']);
+        }
 
         $user->authenticate();
 
-        if ($user->auth == TRUE) {
+        if ($user->auth == TRUE) 
+		{
             $_SESSION['auth'] = true;
+			$_SESSION['username'] = $_POST['username'];
+			$log->login();
         }
-        else 
-		{
-			$_SESSION['countAttampts'] != 1;
-		array_push($_SESSION['login_attempt'], array($_POST['username'],$_POST ['password']));
-		{
+		else
+		{		
+			$log->failed();
+			session_start();
+			$_SESSION['attempts']++;
+			if(intval($_SESSION['attempts']) >= 3)
+			{
+				if(!isset($_COOKIE['attempts']))
+				{
+				setcookie('attempts', "userLogin", time() + 60,"/"); 
+				}
+				unset($_SESSION['attempts']);
+			}				
+		}
+       
         header('Location: /home');
+		
     }
-		}
-		}
-	}
+	
 	public function register () {
 		$user = $this->model('User');
-		 
-		// Processing form data when form is submitted
-		if($_SERVER["REQUEST_METHOD"] == "POST")
-		{
-			if (isset($_SESSION['done_register']) && $_SESSION['done_register'] == false) {
-				echo "user name is alredy used.";
-				session_unset($_SESSION['done_register']);
-		} 
-		else if
-			{
-				if (isset($_SESSION['password_Okay']) && $_SESSION['password_Okay'] == false) {
-				echo "password must contain at least one capital letter ";
-				session_unset($_SESSION['password_Okay']);
-		} 
-		else
-			{
-			$usename= $_POST['usename'];
-			$password= $_POST['password'];
-			$_SESSION['password_Okay'] = true;
-			
-			if (strlen($password) < 1)
-			{
-					$_SESSION ['password_Okay'] = false;
-				
-			}
-			$pass_array = str_split($password);
-			$number = false;
-			$upercase = false;
-			$lowercase = false;
-			$symbol = false;
-			
-			foreach($paaword_array as $value);
-				if(is_numeric($value)
-				{
-					$number = true;
-				}
-				elseif (ctype_lower($value))
-				{
-					$lowercase = true;
-				}
-				elseif (ctype_upper($value))
-				{
-					$uppercase = true;
-				}
-				elseif (ctype_punct($value))
-				{
-					$symbol = true;
-				}		
-			}
-				
-			if (!($number && $lowercase && $upercase && $symbol))
-			{
-				$_SESSION ['password_Okay'] = false;
-			}
-			if($_SESSION ['password_Okay'])
-			{
-				$password = password_hash($_POST['password'], PASSWORD_DEFAULT $_POST['password']);
-				$user-> register($username, $password);
-				
-				if($_SESSION['done_register'])
-				{
-					$_SESSION ['auth'] = true;
-				
-				
-				
-	
-    
-    include("connection.php");
- 
-    if(isset($_POST['submit'])) {
-        $name = $_POST['username'];
-        $email = $_POST['email'];
-        $user = $_POST['username'];
-        $pass = $_POST['password'];
- 
-        if($user == "" || $pass == "" || $name == "" || $email == "") {
-            echo "All fields should be filled. Either one or many fields are empty.";
-            echo "<br/>";
-            echo "<a href='register.php'>Go back</a>";
-        } else {
-            mysqli_query($mysqli, "INSERT INTO login(name, email, username, password) VALUES('$name', '$email', '$user', md5('$pass'))")
-            or die("Could not execute the insert query.");
-            
-            echo "Registration successfully";
-            echo "<br/>";
-            echo "<a href='login.php'>Login</a>";
-        }
-    } else {
-
-        <p><font size="+2">Register</font></p>
-        <form name="form1" method="post" action="">
-            <table width="75%" border="0">
-                <tr> 
-                    <td width="10%">Full Name</td>
-                    <td><input type="text" name="name"></td>
-                </tr>
-                <tr> 
-                    <td>Email</td>
-                    <td><input type="text" name="email"></td>
-                </tr>            
-                <tr> 
-                    <td>Username</td>
-                    <td><input type="text" name="username"></td>
-                </tr>
-                <tr> 
-                    <td>Password</td>
-                    <td><input type="password" name="password"></td>
-                </tr>
-                <tr> 
-                    <td>&nbsp;</td>
-                    <td><input type="submit" name="submit" value="Submit"></td>
-                </tr>
-            </table>
-        </form>
-    <?php
-    }
-    ?>
-
-		$this->view('home/register');
-	}
-}
-			}
-			
+		
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$username = $_POST['username'];
+			$password = $_POST['password'];
+			$user->register($username, $password);
 		}
+		
+		$this->view('home/register');
 	}
 }
